@@ -1,0 +1,74 @@
+<html>
+	<head>
+		<title>Three.js Tween test</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				overflow: hidden;
+			}
+
+			.buttons {
+				padding: 20px;
+				position: absolute;
+				top: 50%;
+			}
+
+			.button {
+				border: 0;
+				border-radius: 5px;
+				cursor: pointer;
+				display: flex;
+				font-weight: bold;
+				flex-direction: row;
+				margin: 1em 0;
+				min-width: 150px;
+				padding: 10px 20px 10px 40px;
+				position: relative;
+				text-transform: uppercase;
+				transition: opacity 0.3s;
+			}
+
+			.button::before,
+			.button::after {
+				border: 3px solid;
+				border-radius: 50%;
+				content: '';
+				height: 10px;
+				left: 0;
+				margin: 0 10px;
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				transition: all 0.3s;
+				width: 10px;
+			}
+
+			.button::after {
+				transform: translateY(-50%) scale(0);
+			}
+
+			.button:hover,
+			.button:focus {
+				opacity: 0.75;
+			}
+
+			.button.is-active::after {
+				background-color: #000;
+				transform: translateY(-50%) scale(1);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="buttons">
+			<button class="button is-active" id="birds-eye">Birds-eye</button>
+			<button class="button" id="face-on">Face-on</button>
+		</div>
+		<div id="container"></div>
+		<script type="module" src="./scripts.js"></script>
+	</body>
+</html>

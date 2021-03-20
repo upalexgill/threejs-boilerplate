@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<title>Three.js Virtual experience PoC</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				overflow: hidden;
+			}
+
+			#gif-loader {
+				position: fixed;
+				height: 100%;
+				background-color: #fff;
+				width: 100%;
+				top: 0;
+				left: 0;
+				display: flex;
+				align-items: center;
+			}
+
+			#gif-loader img {
+				display: block;
+				height: auto;
+				margin: 0 auto;
+				max-width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="gif-loader"><img src="https://assets.codepen.io/238794/loader.gif" /></div>
+		<div id="container"></div>
+		<script type="module" src="./scripts.js"></script>
+	</body>
+</html>
