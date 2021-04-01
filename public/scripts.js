@@ -1,4 +1,4 @@
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.126.1/build/three.module.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.126/build/three.module.js';
 import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.126/examples/jsm/controls/OrbitControls.js';
 import Stats from 'https://cdn.jsdelivr.net/npm/three@0.126/examples/jsm/libs/stats.module.js';
 import { GUI } from 'https://cdn.jsdelivr.net/npm/three@0.126/examples/jsm/libs/dat.gui.module.js';
