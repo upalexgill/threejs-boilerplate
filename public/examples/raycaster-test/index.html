@@ -1,0 +1,56 @@
+<html>
+		<meta name="viewport" content="width=device-width, initial-scale=1"><head>
+		<title>Three.js Raycaster test</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			#loading {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+				z-index: 10;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: white;
+				font-size: 3rem;
+			}
+
+			.buttons {
+				padding: 20px;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				z-index: 1;
+			}
+
+			.button {
+				border: 0;
+				border-radius: 5px;
+				cursor: pointer;
+				font-weight: bold;
+				margin: 1em 0;
+				min-width: 150px;
+				padding: 10px 20px;
+				position: relative;
+				text-align: center;
+				text-transform: uppercase;
+				transition: opacity 0.3s;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="loading"></div>
+		<div id="container"></div>
+		<div class="buttons">
+			<button class="button" id="reset">Reset</button>
+		</div>
+		<script type="module" src="./scripts.js"></script>
+	</body>
+</html>
