@@ -1,18 +1,19 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.126/build/three.module.js';
 import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.126/examples/jsm/controls/OrbitControls.js';
-import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.126/examples/jsm/loaders/GLTFLoader.js";;
+import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.126/examples/jsm/loaders/GLTFLoader.js";
 
 let camera, light, controls, scene, renderer;
 let gifLoader = document.getElementById("gif-loader");
-
 init();
 animate();
 
 function init() {
 	scene = new THREE.Scene();
-	scene.background = new THREE.Color(0x000000);
+	scene.background = new THREE.Color(0xdddddd);
 	renderer = new THREE.WebGLRenderer({ antialias: true });
-  // renderer.shadowMap.enabled = true;
+  renderer.shadowMap.enabled = true;
+  renderer.toneMapping = THREE.ReinhardToneMapping;
+  renderer.toneMappingExposure = 2.3;
 	renderer.setPixelRatio(window.devicePixelRatio);
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	document.body.appendChild(renderer.domElement);
@@ -27,26 +28,19 @@ function init() {
   controls.minDistance = 100;
   controls.maxDistance = 500;
   controls.maxPolarAngle = Math.PI / 2;
+  controls.enableZoom = false;
 
-  let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.61);
-  hemiLight.position.set(0, 50, 0);
-  scene.add(hemiLight);
+let hemiLight = new THREE.HemisphereLight(0xffeeb1, 0x080820, 4);
+scene.add(hemiLight);
 
-  let d = 8.25;
-  let dirLight = new THREE.DirectionalLight(0xffffff, 0.54);
-  dirLight.position.set(-8, 12, 8);
-  dirLight.castShadow = true;
-  dirLight.shadow.mapSize = new THREE.Vector2(1024, 1024);
-  dirLight.shadow.camera.near = 0.1;
-  dirLight.shadow.camera.far = 1500;
-  dirLight.shadow.camera.left = d * -1;
-  dirLight.shadow.camera.right = d;
-  dirLight.shadow.camera.top = d;
-  dirLight.shadow.camera.bottom = d * -1;
-  scene.add(dirLight);
+light = new THREE.SpotLight(0xffa95c,4);
+light.position.set(-50,50,50);
+light.castShadow = true;
+light.shadow.bias = -0.0001;
+light.shadow.mapSize.width = 1024*4;
+light.shadow.mapSize.height = 1024*4;
+scene.add(light);
 
-  const pointLightHelper = new THREE.PointLightHelper(dirLight);
-  scene.add(pointLightHelper);
 
 
  let loader = new GLTFLoader();
@@ -58,12 +52,16 @@ function init() {
 
         model.traverse((o) => {
           if (o.isMesh) {
-            // o.castShadow = true;
-            // o.receiveShadow = true;
+            o.castShadow = true;
+            o.receiveShadow = true;
+            if (o.material.map) o.material.map.anisotropy = 16;
           }
+
+
         });
         model.scale.set(2, 2, 2);
         model.position.x = -15;
+        model.position.y = -6;
         model.position.z = 10;
         scene.add(model);
         gifLoader.remove();
@@ -81,7 +79,7 @@ function init() {
 
   const helper = new THREE.GridHelper(50, 50);
   helper.material.transparent = true;
-  scene.add(helper);
+ // scene.add(helper);
 
   const axisHelper = new THREE.AxesHelper(100);
   scene.add(axisHelper);
@@ -96,6 +94,11 @@ function onWindowResize() {
 function animate() {
   requestAnimationFrame(animate);
   controls.update();
+  light.position.set(
+    camera.position.x + 10,
+    camera.position.y + 10,
+    camera.position.z + 10,
+  );
   render();
 }
 
