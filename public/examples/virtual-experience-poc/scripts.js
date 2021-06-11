@@ -9,7 +9,7 @@ animate();
 
 function init() {
 	scene = new THREE.Scene();
-	scene.background = new THREE.Color(0xdddddd);
+	scene.background = new THREE.Color(0x000000);
 	renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.shadowMap.enabled = true;
   renderer.toneMapping = THREE.ReinhardToneMapping;
@@ -79,10 +79,10 @@ scene.add(light);
 
   const helper = new THREE.GridHelper(50, 50);
   helper.material.transparent = true;
- // scene.add(helper);
+  // scene.add(helper);
 
   const axisHelper = new THREE.AxesHelper(100);
-  scene.add(axisHelper);
+  // scene.add(axisHelper);
 }
 
 function onWindowResize() {
