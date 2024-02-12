@@ -278,6 +278,7 @@ function animate() {
   if (checkLeavingPlane(character, plane)) {
     setTimeout(() => {
       stopAnimate = true;
+      clearInterval(Interval);
       cancelAnimationFrame(animationId)
       message.innerHTML = 'Game Over';
       message.style.display = 'block';
@@ -288,6 +289,7 @@ function animate() {
     obstacle.update(plane)
     if (boxCollision({ box1: character, box2: obstacle })) {
       stopAnimate = true;
+      clearInterval(Interval);
       cancelAnimationFrame(animationId);
       message.innerHTML = 'Game Over';
       message.style.display = 'block';

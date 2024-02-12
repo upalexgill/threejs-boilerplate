@@ -24,6 +24,7 @@
 				position: absolute;
 				top: 0;
 				right: 0;
+				z-index: 1;
 				font-size: var(--font-size-h1);
 				color: #fff;
 				margin: 1rem;
@@ -33,6 +34,7 @@
 				position: absolute;
 				top: 50%;
 				left: 50%;
+				z-index: 1;
 				transform: translate(-50%, -50%);
 				display: flex;
 				align-items: center;
@@ -52,6 +54,7 @@
 				position: absolute;
 				top: 50%;
 				left: 50%;
+				z-index: 1;
 				transform: translate(-50%, -50%);
 				color: #fc7271;
 				width: 100%;
@@ -68,6 +71,7 @@
 				position: absolute;
 				top: 75px;
 				left: 50%;
+				z-index: 1;
 				transform: translateX(-50%);
 				display: flex;
 				flex-direction: column;
@@ -146,6 +150,8 @@
 					countdown.innerHTML = "GO";
 					setTimeout(() => {
 						countdown.style.display = "none";
+						clearInterval(Interval);
+						Interval = setInterval(startTimer, 10);
 					}, 1000);
 				} else {
 					countdown.style.display = "flex";
@@ -154,25 +160,11 @@
 				}
 			}
 
-			let count = 3;
-			let timer = setInterval(function () {
-				handleTimer(count);
-			}, 1000);
-		</script>
-		<script>
-			let seconds = 0;
-			let tens = 0;
-			let appendTens = document.getElementById("tens");
-			let appendSeconds = document.getElementById("seconds");
-			let Interval;
-
 			function startTimer() {
 				tens++;
 
 				if (tens <= 9) appendTens.innerHTML = "0" + tens;
-
 				if (tens > 9) appendTens.innerHTML = tens;
-
 				if (tens > 99) {
 					seconds++;
 					appendSeconds.innerHTML = "0" + seconds;
@@ -183,8 +175,16 @@
 				if (seconds > 9) appendSeconds.innerHTML = seconds;
 			}
 
-			clearInterval(Interval);
-			Interval = setInterval(startTimer, 10);
+			let count = 3;
+			let seconds = 0;
+			let tens = 0;
+			let appendTens = document.getElementById("tens");
+			let appendSeconds = document.getElementById("seconds");
+			let Interval;
+
+			let timer = setInterval(function () {
+				handleTimer(count);
+			}, 1000);
 		</script>
 		<script type="module" src="./scripts.js"></script>
 	</body>
